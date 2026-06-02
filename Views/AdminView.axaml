@@ -1,0 +1,65 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="DemoText12.Views.AdminView"
+             xmlns:vm="using:DemoText12.ViewModels"
+             x:DataType="vm:AdminViewModel"
+             FontFamily="Times New Romen">
+  <Grid RowDefinitions="30,350,*">
+       <Border Grid.Row="0" Background="#7FFF00">
+        <TextBlock Text="Список товаров" HorizontalAlignment="Center" FontSize="20"></TextBlock>
+    </Border>
+      <StackPanel Grid.Row="1">
+          <TextBlock Text="{Binding FullName, StringFormat='ФИО {0}'}" VerticalAlignment="Center" HorizontalAlignment="Right"></TextBlock>
+          <TextBox Text="{Binding TextFind}" Watermark="Введите для поиска"></TextBox>
+          <ComboBox ItemsSource="{Binding DiscountOptions}" SelectedItem="{Binding SelectedDiscount}"></ComboBox>
+           <ComboBox ItemsSource="{Binding Price}" SelectedItem="{Binding SelectPrice}"></ComboBox>
+           <ComboBox ItemsSource="{Binding CounOnStock}" SelectedItem="{Binding SelectCountOnSrock}"></ComboBox>
+          <RadioButton Content="По возрастанию" Command="{Binding SortCount}" CommandParameter="1"></RadioButton>
+           <RadioButton Content="По убыванию" Command="{Binding SortCount}" CommandParameter="2"></RadioButton>
+         <Button Content="Добавить товар" Command="{Binding CreateScreen}"></Button>
+          <Button Content="Заказы" Command="{Binding OrderScreen}"></Button>
+      </StackPanel>
+      <ListBox Grid.Row="2" ItemsSource="{Binding ProductWithImage}" SelectedItem="{Binding RowSelect}" SelectionMode="Single">
+          <ListBox.ItemTemplate>
+              <DataTemplate>
+                  <Border Background="{Binding Product.Thine}">
+                  <Grid ColumnDefinitions="200,*,200,150">
+                      <Image Grid.Column="0" Source="{Binding Image}" Width="150" Height="150"></Image>
+                      <StackPanel Grid.Column="1">
+                          <TextBlock>
+                      <TextBlock.Inlines>
+                          <Run Text="{Binding Product.IdProductCategoryNavigation.Name}" FontWeight="Bold"></Run>
+                          <Run Text=" | "></Run>
+                          <Run Text="{Binding Product.IdProductNameNavigation.Name}" FontWeight="Bold"></Run>
+                      </TextBlock.Inlines>
+                  </TextBlock>
+
+                          <TextBlock Text="{Binding Product.Discription, StringFormat='Описание товара {0}'}"></TextBlock>
+                          <TextBlock Text="{Binding Product.IdMakerNavigation.Name, StringFormat='Производитель {0}'}"></TextBlock>
+                          <TextBlock Text="{Binding Product.IdSupplierNavigation.Name, StringFormat='Поставщик {0}'}"></TextBlock>
+                          <StackPanel Orientation="Horizontal">
+                              <TextBlock Text="Цена "></TextBlock>
+                              <TextBlock Text="{Binding Product.Price}" IsVisible="{Binding Product.HasDiscount1}"></TextBlock>
+                              <TextBlock Text="{Binding Product.Price}" IsVisible="{Binding Product.HasDiscount}" Foreground="Red" TextDecorations="Strikethrough"></TextBlock>
+                              <TextBlock Text="{Binding Product.PriceResult, StringFormat=' ->  {0}'}" IsVisible="{ Binding Product.HasDiscount}"></TextBlock>
+                          </StackPanel>
+                          
+                          <TextBlock Text="{Binding Product.Unit, StringFormat='Единица измерения {0}'}"></TextBlock>
+                          <TextBlock Text="{Binding Product.CountOnStock, StringFormat='Количество на складе {0}'}"></TextBlock>
+                      </StackPanel>
+                      <StackPanel Grid.Column="2">
+                           <TextBlock Text="{Binding Product.Discount, StringFormat='Действующая скидка {0} %'}"></TextBlock>
+                      </StackPanel>
+                      <StackPanel Grid.Column="3">
+                          <Button Content="Удалить" Command="{Binding $parent[UserControl]((vm:AdminViewModel)DataContext).RemoScreem}" CommandParameter="{Binding}"></Button>
+                      </StackPanel>
+                  </Grid>
+                  </Border>
+              </DataTemplate>
+          </ListBox.ItemTemplate>
+      </ListBox>
+  </Grid>
+</UserControl>

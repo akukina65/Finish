@@ -1,0 +1,55 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="DemoText12.Views.OrderView"
+             xmlns:vm="using:DemoText12.ViewModels"
+             x:DataType="vm:OrderViewModel"
+             FontFamily="Times New Romen">
+ <Grid RowDefinitions="30,250,*">
+       <Border Grid.Row="0" Background="#7FFF00">
+        <TextBlock Text="Список заказов" HorizontalAlignment="Center" FontSize="20"></TextBlock>
+    </Border>
+      <StackPanel Grid.Row="1">
+         
+         <Button Content="Добавить товар" Command="{Binding CreateOrder}"></Button>
+      </StackPanel>
+      <ListBox Grid.Row="2" ItemsSource="{Binding Orders}" SelectedItem="{Binding RowSelect}" SelectionMode="Single">
+          <ListBox.ItemTemplate>
+              <DataTemplate>
+                  
+                  <Grid ColumnDefinitions="*,300,200">
+                     
+                      <StackPanel Grid.Column="0">
+                         
+
+                          
+                          <TextBlock Text="{Binding IdOrderStatusNavigation.Name, StringFormat='Статус заказа {0}'}"></TextBlock>
+                          <TextBlock>
+                              <TextBlock.Inlines>
+                                  <Run Text="Адрес пункта выдачи"></Run>
+                                  <Run Text="{Binding IdAdressPointNavigation.Index}"></Run>
+                                  <Run Text="{Binding IdAdressPointNavigation.City}"></Run>
+                                  <Run Text="{Binding IdAdressPointNavigation.Streat}"></Run>
+                                  <Run Text="{Binding IdAdressPointNavigation.Number}"></Run>
+                              </TextBlock.Inlines>
+                          </TextBlock>
+                          
+                          
+                          
+                          <TextBlock Text="{Binding OrderDate, StringFormat='Дата заказа {0}'}"></TextBlock>
+                      </StackPanel>
+                      <StackPanel Grid.Column="1">
+                           <TextBlock Text="{Binding DeliveryDate, StringFormat='Дата доставки {0} %'}"></TextBlock>
+                      </StackPanel>
+                      <StackPanel Grid.Column="2">
+                          <Button Content="Удалить"  Command="{Binding $parent[UserControl]((vm:OrderViewModel)DataContext).Removerder}" CommandParameter="{Binding}"></Button>
+                      </StackPanel>
+                  </Grid>
+                  
+              </DataTemplate>
+          </ListBox.ItemTemplate>
+      </ListBox>
+  </Grid>
+</UserControl>

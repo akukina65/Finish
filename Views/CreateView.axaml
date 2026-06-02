@@ -1,0 +1,81 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="DemoText12.Views.CreateView"
+               xmlns:vm="using:DemoText12.ViewModels"
+             x:DataType="vm:CreateViewModel"
+             FontFamily="Times New Romen">
+ <Grid RowDefinitions="30,*">
+       <Border Grid.Row="0" Background="#7FFF00">
+        <TextBlock Text="Создание товара" HorizontalAlignment="Center" FontSize="20"></TextBlock>
+    </Border>
+      
+      
+                  
+            <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Image Source="{Binding Image}" Width="150" Height="150"></Image>
+                <Button Content="Изменить фото" Command="{Binding SelectImage}"></Button>
+                <TextBlock Text="Категория товара"></TextBlock>
+                <ComboBox ItemsSource="{Binding Categories}" SelectedItem="{Binding Products.IdProductCategoryNavigation}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}"></TextBlock>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+
+                 <TextBlock Text="Наименование товара"></TextBlock>
+                <ComboBox ItemsSource="{Binding ProductNames}" SelectedItem="{Binding Products.IdProductNameNavigation}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}"></TextBlock>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+
+
+                 <TextBlock Text="Поставщик товара"></TextBlock>
+                <ComboBox ItemsSource="{Binding Suppliers}" SelectedItem="{Binding Products.IdSupplierNavigation}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}"></TextBlock>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+
+
+                 <TextBlock Text="Производитель товара"></TextBlock>
+                <ComboBox ItemsSource="{Binding Makers}" SelectedItem="{Binding Products.IdMakerNavigation}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}"></TextBlock>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+
+                 <TextBlock Text="Артикул товара"></TextBlock>
+                <TextBox Text="{Binding Products.Article}"></TextBox>
+
+                 <TextBlock Text="Количество на складе товара"></TextBlock>
+                <TextBox Text="{Binding Products.CountOnStock}"></TextBox>
+
+
+                 <TextBlock Text="Скидка на товара"></TextBlock>
+                <NumericUpDown Value="{Binding Products.Discount}" Minimum="0" Watermark="0"></NumericUpDown>
+
+
+                 <TextBlock Text="Описание товара"></TextBlock>
+                <TextBox Text="{Binding Products.Discription}"></TextBox>
+
+                <TextBlock Text="Цена товара"></TextBlock>
+                <TextBox Text="{Binding Products.Price}"></TextBox>
+                <TextBlock Text="Единица измерения товара"></TextBlock>
+                <TextBox Text="{Binding Products.Unit}"></TextBox>
+                <Button Content="Сохранить" Command="{Binding Save}"></Button>
+
+            </StackPanel>
+                  
+  </Grid>
+</UserControl>

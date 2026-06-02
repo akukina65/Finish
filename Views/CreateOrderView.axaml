@@ -1,0 +1,54 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="DemoText12.Views.CreateOrderView"
+             xmlns:vm="using:DemoText12.ViewModels"
+             x:DataType="vm:CreateOrderViewModel"
+             FontFamily="Times New Romen">
+   <Grid RowDefinitions="30,*">
+        <Border Grid.Row="0" Background="#7FFF00">
+            <TextBlock Text="Редактирование заказа" HorizontalAlignment="Center" FontSize="20"/>
+        </Border>
+        
+       
+            <StackPanel Margin="10">
+                
+                <TextBlock Text="Статус заказа"/>
+                <ComboBox ItemsSource="{Binding OrderStatus}" SelectedItem="{Binding Orders.IdOrderStatusNavigation}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+                
+                <TextBlock Text="Пункт выдачи"/>
+                <ComboBox ItemsSource="{Binding AdressPoints}" SelectedItem="{Binding Orders.IdAdressPointNavigation}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Index}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+                
+                <TextBlock Text="Дата заказа"/>
+                <DatePicker SelectedDate="{Binding DateOrd}"/>
+                
+                <TextBlock Text="Дата доставки"/>
+                <DatePicker SelectedDate="{Binding DatePol}"/>
+                
+                
+                
+               
+                    
+                
+                
+                
+                <Button Content="Сохранить" Command="{Binding Save}" Background="#7FFF00"/>
+                
+            </StackPanel>
+       
+    </Grid>
+</UserControl>
